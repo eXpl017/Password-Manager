@@ -1,0 +1,31 @@
+Outline:
+-cmd line tool
+-take master pass and show entries
+-automatically copy pass to clipboard
+-generate random pass
+
+Implementation:
+
+-Configure:
+  -MASTER PASSWORD input while configuring, hash of it stored in a file
+  -SALT/DEVICE SECRET generated randomly, stored in a file
+  -MASTER PASS + SALT passed to hashing function to create the MASTER KEY, used for AES256 encryption
+  -MASTER KEY used to encrypt/decrypt passwords
+  -encrypted fields - uname, pass, email
+  -plain fields - site name, url
+
+-Adding new entry:
+  -get MASTER PASS
+  -hash it to see if it matches available hash
+  -combine with SALT, get MASTER KEY
+  -use it to encrypt the fields, store it in a DB
+  -also imp to see if all req entries available
+
+-Get entry:
+  -input the field to search for
+  -show all matching with password hidden (ofc)
+  -if user wants to get pass:
+  	-ask for MASTER PASS
+  	-validate, combine with SALT, and decrypt using MASTER KEY
+  	-copy to clipboard
+
